@@ -3,35 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quote Request — TradeDesk</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<title>Quote Request — Aulintri</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0c0f;
-    --surface: #111418;
-    --surface2: #181d24;
-    --border: #1f2733;
-    --border2: #2a3542;
-    --accent: #00d4ff;
-    --accent2: #0099cc;
-    --accent-dim: rgba(0,212,255,0.08);
-    --accent-glow: rgba(0,212,255,0.15);
-    --gold: #f5c842;
-    --gold-dim: rgba(245,200,66,0.1);
-    --green: #00e5a0;
-    --green-dim: rgba(0,229,160,0.1);
-    --red: #ff4d6d;
-    --red-dim: rgba(255,77,109,0.1);
-    --warn: #ff9500;
-    --warn-dim: rgba(255,149,0,0.1);
-    --text: #e8edf2;
-    --text2: #8fa3b8;
-    --text3: #4a5f72;
-    --mono: 'DM Mono', monospace;
-    --sans: 'DM Sans', sans-serif;
-    --display: 'Syne', sans-serif;
+    /* Aulintri Brand Colors */
+    --navy:       #1F2A44;
+    --teal:       #28B5B5;
+    --blue:       #1371BF;
+    --cyan:       #00CFE8;
+    --light:      #E8ECEF;
+    --white:      #FFFFFF;
+    --black:      #000000;
+
+    /* Derived UI tokens */
+    --bg:         #F4F6F9;
+    --surface:    #FFFFFF;
+    --surface2:   #EEF2F6;
+    --border:     #D6DCE4;
+    --border2:    #C2CCD8;
+
+    --accent:     #00CFE8;
+    --accent2:    #1371BF;
+    --accent-dim: rgba(0, 207, 232, 0.10);
+    --accent-glow:rgba(0, 207, 232, 0.20);
+
+    --teal-dim:   rgba(40, 181, 181, 0.10);
+    --navy-dim:   rgba(31, 42, 68, 0.06);
+
+    --green:      #1DB87A;
+    --green-dim:  rgba(29, 184, 122, 0.10);
+    --red:        #E03B5A;
+    --red-dim:    rgba(224, 59, 90, 0.10);
+    --warn:       #E07B1B;
+    --warn-dim:   rgba(224, 123, 27, 0.10);
+    --gold:       #1371BF;
+    --gold-dim:   rgba(19, 113, 191, 0.10);
+
+    --text:       #1F2A44;
+    --text2:      #4A5F78;
+    --text3:      #8FA3B8;
+
+    --mono: 'Montserrat', sans-serif;
+    --sans: 'Montserrat', sans-serif;
+    --display: 'Montserrat', sans-serif;
     --radius: 8px;
     --radius2: 12px;
+
+    /* Sidebar width */
+    --sidebar-w: 230px;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,61 +65,54 @@
     overflow-x: hidden;
   }
 
-  /* Subtle grid background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 48px 48px;
-    opacity: 0.25;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* Top header bar */
+  /* ── PLATFORM BAR ── */
   .platform-bar {
     position: fixed;
     top: 0; left: 0; right: 0;
-    height: 52px;
-    background: rgba(10,12,15,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+    height: 58px;
+    background: var(--navy);
+    border-bottom: 3px solid var(--teal);
     display: flex;
     align-items: center;
     padding: 0 24px;
     gap: 0;
     z-index: 100;
+    box-shadow: 0 2px 16px rgba(31,42,68,0.18);
   }
 
   .platform-logo {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 16px;
-    letter-spacing: -0.5px;
-    color: var(--text);
-    margin-right: 32px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    margin-right: 36px;
+    text-decoration: none;
   }
 
-  .platform-logo span {
-    color: var(--accent);
+  .platform-logo img {
+    height: 78px;
+    width: auto;
+    object-fit: contain;
+    /* Logo has dark text on transparent — invert for dark bar */
+    filter: brightness(0) invert(1);
   }
 
-  .platform-logo .logo-badge {
+  .logo-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255,255,255,0.2);
+    margin: 0 4px;
+  }
+
+  .logo-badge {
     font-size: 9px;
-    font-family: var(--mono);
-    font-weight: 500;
-    letter-spacing: 1px;
-    background: var(--accent-dim);
-    color: var(--accent);
-    border: 1px solid rgba(0,212,255,0.2);
-    padding: 2px 6px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    background: rgba(0, 207, 232, 0.18);
+    color: var(--cyan);
+    border: 1px solid rgba(0,207,232,0.35);
+    padding: 2px 7px;
     border-radius: 4px;
+    text-transform: uppercase;
   }
 
   .platform-nav {
@@ -109,20 +122,20 @@
   }
 
   .nav-item {
-    font-family: var(--mono);
-    font-size: 11px;
+    font-family: var(--sans);
+    font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.5px;
-    color: var(--text3);
-    padding: 6px 14px;
+    letter-spacing: 0.3px;
+    color: rgba(255,255,255,0.55);
+    padding: 7px 14px;
     border-radius: var(--radius);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.18s;
     white-space: nowrap;
   }
 
-  .nav-item:hover { color: var(--text2); background: var(--surface); }
-  .nav-item.active { color: var(--accent); background: var(--accent-dim); }
+  .nav-item:hover { color: rgba(255,255,255,0.88); background: rgba(255,255,255,0.07); }
+  .nav-item.active { color: var(--cyan); background: rgba(0,207,232,0.12); font-weight: 600; }
 
   .platform-right {
     display: flex;
@@ -135,47 +148,62 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    font-family: var(--mono);
-    color: var(--text2);
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
   }
 
   .user-avatar {
-    width: 28px; height: 28px;
+    width: 30px; height: 30px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    background: linear-gradient(135deg, var(--teal), var(--cyan));
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--display);
     font-weight: 700;
     font-size: 11px;
-    color: var(--bg);
+    color: var(--navy);
   }
 
-  /* Main layout */
+  /* ── PROGRESS BAR ── */
+  .progress-track {
+    position: fixed;
+    top: 61px; left: 0; right: 0;
+    height: 3px;
+    background: var(--border);
+    z-index: 99;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--cyan));
+    transition: width 0.4s ease;
+    box-shadow: 0 0 8px rgba(0,207,232,0.5);
+  }
+
+  /* ── LAYOUT ── */
   .app-container {
-    padding-top: 52px;
+    padding-top: 64px;
     min-height: 100vh;
     display: flex;
     position: relative;
-    z-index: 1;
   }
 
-  /* Left sidebar: step tracker */
+  /* ── SIDEBAR ── */
   .sidebar {
-    width: 220px;
+    width: var(--sidebar-w);
     flex-shrink: 0;
-    padding: 32px 20px;
-    border-right: 1px solid var(--border);
+    background: var(--navy);
+    border-right: 1px solid rgba(255,255,255,0.07);
+    padding: 32px 16px 32px 20px;
     position: sticky;
-    top: 52px;
-    height: calc(100vh - 52px);
+    top: 64px;
+    height: calc(100vh - 64px);
     overflow-y: auto;
   }
 
   .sidebar-label {
-    font-family: var(--mono);
     font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--text3);
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: rgba(255,255,255,0.3);
     text-transform: uppercase;
     margin-bottom: 20px;
     padding-left: 4px;
@@ -193,130 +221,127 @@
     position: relative;
   }
 
-  .step-item::before {
+  .step-item::after {
     content: '';
     position: absolute;
     left: 22px;
-    top: 36px;
+    top: 38px;
     width: 1px;
     height: calc(100% - 14px);
-    background: var(--border);
+    background: rgba(255,255,255,0.1);
   }
 
-  .step-item:last-child::before { display: none; }
-
-  .step-item.active { background: var(--accent-dim); }
-  .step-item.done { opacity: 0.7; }
+  .step-item:last-child::after { display: none; }
+  .step-item.active { background: rgba(0,207,232,0.12); }
+  .step-item:hover:not(.active) { background: rgba(255,255,255,0.05); }
 
   .step-dot {
-    width: 20px; height: 20px;
+    width: 22px; height: 22px;
     border-radius: 50%;
-    border: 1.5px solid var(--border2);
-    background: var(--surface);
+    border: 2px solid rgba(255,255,255,0.2);
+    background: transparent;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
     margin-top: 1px;
-    font-family: var(--mono);
     font-size: 9px;
-    color: var(--text3);
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
     transition: all 0.2s;
   }
 
   .step-item.active .step-dot {
-    border-color: var(--accent);
-    background: var(--accent);
-    color: var(--bg);
-    font-weight: 700;
-    box-shadow: 0 0 12px var(--accent-glow);
+    border-color: var(--cyan);
+    background: var(--cyan);
+    color: var(--navy);
+    box-shadow: 0 0 12px rgba(0,207,232,0.4);
   }
 
   .step-item.done .step-dot {
-    border-color: var(--green);
-    background: var(--green);
-    color: var(--bg);
+    border-color: var(--teal);
+    background: var(--teal);
+    color: white;
   }
 
-  .step-text {}
   .step-title {
-    font-family: var(--sans);
-    font-weight: 500;
     font-size: 12px;
-    color: var(--text2);
+    font-weight: 600;
+    color: rgba(255,255,255,0.45);
     line-height: 1.3;
+    transition: color 0.2s;
   }
-  .step-item.active .step-title { color: var(--accent); }
-  .step-item.done .step-title { color: var(--text2); }
+
+  .step-item.active .step-title { color: var(--cyan); }
+  .step-item.done .step-title { color: rgba(255,255,255,0.65); }
+
   .step-sub {
-    font-family: var(--mono);
     font-size: 10px;
-    color: var(--text3);
+    font-weight: 400;
+    color: rgba(255,255,255,0.25);
     margin-top: 1px;
   }
 
-  /* Main content */
+  /* ── MAIN CONTENT ── */
   .main-content {
     flex: 1;
-    padding: 40px 48px;
-    max-width: 880px;
+    padding: 36px 44px;
+    max-width: 900px;
   }
 
   .page-header {
-    margin-bottom: 36px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--border);
   }
 
   .breadcrumb {
-    font-family: var(--mono);
     font-size: 11px;
+    font-weight: 500;
     color: var(--text3);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 6px;
   }
 
-  .breadcrumb span { color: var(--text3); }
   .breadcrumb .crumb { color: var(--text2); }
-  .breadcrumb .crumb.current { color: var(--accent); }
+  .breadcrumb .crumb.current { color: var(--blue); }
 
   .page-title {
     font-family: var(--display);
-    font-weight: 700;
-    font-size: 28px;
-    letter-spacing: -0.8px;
-    color: var(--text);
-    line-height: 1.1;
-    margin-bottom: 8px;
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -0.5px;
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 6px;
   }
 
-  .page-title span { color: var(--accent); }
+  .page-title span { color: var(--teal); }
 
   .page-sub {
     font-size: 13px;
+    font-weight: 400;
     color: var(--text2);
     line-height: 1.6;
-    font-weight: 300;
   }
 
-  /* ─── STEP PANELS ─── */
-  .step-panel {
-    display: none;
-    animation: fadeUp 0.3s ease;
-  }
-
+  /* ── STEP PANELS ── */
+  .step-panel { display: none; animation: fadeUp 0.25s ease; }
   .step-panel.active { display: block; }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Section card */
+  /* ── CARDS ── */
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius2);
-    padding: 28px;
+    padding: 26px 28px;
     margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(31,42,68,0.06);
   }
 
   .card-header {
@@ -328,86 +353,77 @@
 
   .card-title {
     font-family: var(--display);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 14px;
-    color: var(--text);
+    color: var(--navy);
     display: flex;
     align-items: center;
     gap: 8px;
   }
 
   .card-title .icon {
-    width: 24px; height: 24px;
-    border-radius: 6px;
-    background: var(--accent-dim);
-    color: var(--accent);
+    width: 26px; height: 26px;
+    border-radius: 7px;
+    background: var(--teal-dim);
+    color: var(--teal);
     display: flex; align-items: center; justify-content: center;
-    font-size: 12px;
+    font-size: 13px;
+    border: 1px solid rgba(40,181,181,0.2);
   }
 
   .card-badge {
-    font-family: var(--mono);
     font-size: 10px;
-    padding: 3px 8px;
+    font-weight: 600;
+    padding: 3px 9px;
     border-radius: 4px;
-    font-weight: 500;
+    letter-spacing: 0.3px;
   }
 
   .badge-ai {
-    background: var(--gold-dim);
-    color: var(--gold);
-    border: 1px solid rgba(245,200,66,0.2);
+    background: rgba(19,113,191,0.10);
+    color: var(--blue);
+    border: 1px solid rgba(19,113,191,0.22);
   }
 
-  /* Upload zone */
+  /* ── UPLOAD ── */
   .upload-zone {
     border: 2px dashed var(--border2);
     border-radius: var(--radius2);
     padding: 48px 32px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.25s;
     background: var(--surface2);
     position: relative;
     overflow: hidden;
   }
 
-  .upload-zone::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
   .upload-zone:hover, .upload-zone.drag-over {
-    border-color: var(--accent);
-    background: var(--accent-dim);
+    border-color: var(--teal);
+    background: rgba(40,181,181,0.05);
   }
 
-  .upload-zone:hover::before, .upload-zone.drag-over::before {
-    opacity: 1;
-  }
+  .upload-zone:hover .upload-icon { transform: scale(1.08); }
 
   .upload-icon {
-    font-size: 40px;
+    font-size: 38px;
     margin-bottom: 12px;
-    filter: grayscale(0.3);
+    transition: transform 0.2s;
+    display: block;
   }
 
   .upload-title {
     font-family: var(--display);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 15px;
-    color: var(--text);
-    margin-bottom: 6px;
+    color: var(--navy);
+    margin-bottom: 5px;
   }
 
   .upload-sub {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text3);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text2);
     margin-bottom: 16px;
   }
 
@@ -419,48 +435,35 @@
   }
 
   .type-pill {
-    font-family: var(--mono);
     font-size: 10px;
-    padding: 3px 8px;
+    font-weight: 600;
+    padding: 3px 9px;
     border-radius: 99px;
     background: var(--surface);
     border: 1px solid var(--border2);
-    color: var(--text3);
+    color: var(--text2);
+    letter-spacing: 0.3px;
   }
 
   #file-input { display: none; }
 
-  /* File preview */
   .file-preview {
     display: none;
     background: var(--surface2);
-    border: 1px solid var(--border2);
+    border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 14px 16px;
+    padding: 12px 16px;
     margin-top: 12px;
     align-items: center;
     gap: 12px;
   }
-
   .file-preview.show { display: flex; }
 
-  .file-icon {
-    font-size: 24px;
-    flex-shrink: 0;
-  }
+  .file-icon { font-size: 22px; flex-shrink: 0; }
 
   .file-info { flex: 1; }
-  .file-name {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text);
-    margin-bottom: 2px;
-  }
-  .file-meta {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
-  }
+  .file-name { font-size: 12px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+  .file-meta { font-size: 10px; color: var(--text3); }
 
   .file-remove {
     width: 24px; height: 24px;
@@ -470,57 +473,43 @@
     color: var(--red);
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-    transition: all 0.2s;
+    font-size: 15px;
+    transition: all 0.18s;
   }
-
   .file-remove:hover { background: var(--red); color: white; }
 
-  /* AI extraction status */
+  /* ── AI STATUS ── */
   .ai-status {
     display: none;
-    background: var(--surface2);
-    border: 1px solid var(--border2);
+    background: rgba(19,113,191,0.06);
+    border: 1px solid rgba(19,113,191,0.18);
     border-radius: var(--radius);
-    padding: 16px;
+    padding: 14px 16px;
     margin-top: 12px;
     align-items: center;
     gap: 12px;
   }
-
   .ai-status.show { display: flex; }
 
   .ai-spinner {
-    width: 20px; height: 20px;
-    border: 2px solid var(--border2);
-    border-top-color: var(--gold);
+    width: 18px; height: 18px;
+    border: 2px solid var(--border);
+    border-top-color: var(--blue);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
     flex-shrink: 0;
   }
-
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .ai-status-text {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text2);
-  }
+  .ai-status-text { font-size: 11px; font-weight: 400; color: var(--text2); }
+  .ai-status-text strong { color: var(--blue); font-weight: 700; display: block; margin-bottom: 1px; font-size: 12px; }
 
-  .ai-status-text strong {
-    color: var(--gold);
-    font-weight: 500;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  /* Form grid */
+  /* ── FORMS ── */
   .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
   }
-
   .form-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
   .form-grid.cols-1 { grid-template-columns: 1fr; }
 
@@ -529,16 +518,14 @@
     flex-direction: column;
     gap: 5px;
   }
-
   .form-group.span-2 { grid-column: span 2; }
 
   label {
-    font-family: var(--mono);
     font-size: 10px;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    color: var(--text3);
+    color: var(--text2);
     display: flex;
     align-items: center;
     gap: 5px;
@@ -546,65 +533,62 @@
 
   label .ai-tag {
     font-size: 9px;
-    background: var(--gold-dim);
-    color: var(--gold);
-    border: 1px solid rgba(245,200,66,0.2);
+    background: rgba(19,113,191,0.09);
+    color: var(--blue);
+    border: 1px solid rgba(19,113,191,0.2);
     padding: 1px 5px;
     border-radius: 3px;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
     text-transform: none;
-    font-weight: 400;
+    font-weight: 600;
   }
 
-  label .required {
-    color: var(--red);
-    font-size: 12px;
-    letter-spacing: 0;
-  }
+  label .required { color: var(--red); font-size: 13px; letter-spacing: 0; }
 
   input, select, textarea {
     background: var(--surface2);
-    border: 1px solid var(--border);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius);
-    color: var(--text);
+    color: var(--navy);
     font-family: var(--sans);
     font-size: 13px;
-    padding: 10px 12px;
+    font-weight: 500;
+    padding: 9px 12px;
     outline: none;
-    transition: all 0.2s;
+    transition: all 0.18s;
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
   }
 
   input:focus, select:focus, textarea:focus {
-    border-color: var(--accent);
-    background: var(--bg);
-    box-shadow: 0 0 0 3px var(--accent-dim);
+    border-color: var(--teal);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(40,181,181,0.12);
   }
 
   input.ai-filled {
-    border-color: rgba(245,200,66,0.3);
-    background: rgba(245,200,66,0.03);
+    border-color: rgba(19,113,191,0.3);
+    background: rgba(19,113,191,0.04);
   }
 
   input.ai-filled:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px var(--gold-dim);
+    border-color: var(--blue);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(19,113,191,0.1);
   }
 
   select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234a5f72' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238FA3B8' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
     padding-right: 32px;
   }
 
-  select option { background: var(--surface2); }
-
+  select option { background: white; color: var(--navy); }
   textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
 
-  /* Radio group */
+  /* ── RADIO GROUP ── */
   .radio-group {
     display: flex;
     gap: 8px;
@@ -616,106 +600,107 @@
     align-items: center;
     gap: 6px;
     padding: 8px 14px;
-    border: 1px solid var(--border);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.18s;
     background: var(--surface2);
     font-size: 12px;
+    font-weight: 500;
     color: var(--text2);
-    font-weight: 400;
     user-select: none;
   }
-
   .radio-option input { display: none; }
   .radio-option.selected {
-    border-color: var(--accent);
-    background: var(--accent-dim);
-    color: var(--accent);
-    font-weight: 500;
+    border-color: var(--teal);
+    background: var(--teal-dim);
+    color: var(--teal);
+    font-weight: 700;
+  }
+  .radio-option:hover:not(.selected) {
+    border-color: var(--border2);
+    background: var(--surface);
   }
 
-  /* Divider */
   .form-divider {
     border: none;
     border-top: 1px solid var(--border);
-    margin: 20px 0;
+    margin: 18px 0;
   }
 
-  /* Credit check */
+  /* ── CREDIT CHECK ── */
   .credit-panel {
-    background: var(--surface2);
-    border: 1px solid var(--border);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius2);
-    padding: 24px;
+    padding: 24px 26px;
     margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(31,42,68,0.06);
   }
 
   .credit-header {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 20px;
   }
 
   .credit-icon {
-    width: 36px; height: 36px;
+    width: 38px; height: 38px;
     border-radius: 10px;
-    background: var(--gold-dim);
-    color: var(--gold);
+    background: rgba(19,113,191,0.1);
+    color: var(--blue);
     display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
+    font-size: 17px;
     flex-shrink: 0;
+    border: 1px solid rgba(19,113,191,0.2);
   }
 
-  .credit-info {}
   .credit-title {
     font-family: var(--display);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 14px;
-    color: var(--text);
+    color: var(--navy);
   }
   .credit-sub {
-    font-family: var(--mono);
     font-size: 10px;
+    font-weight: 400;
     color: var(--text3);
     margin-top: 1px;
   }
 
   .credit-run-btn {
     margin-left: auto;
-    padding: 8px 16px;
-    background: var(--gold-dim);
-    border: 1px solid rgba(245,200,66,0.25);
-    color: var(--gold);
+    padding: 9px 18px;
+    background: var(--blue);
+    border: none;
+    color: white;
     border-radius: var(--radius);
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
     white-space: nowrap;
   }
-
-  .credit-run-btn:hover { background: rgba(245,200,66,0.18); }
+  .credit-run-btn:hover { background: #0f5fa3; box-shadow: 0 2px 12px rgba(19,113,191,0.3); }
   .credit-run-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
   .credit-fields {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 4px;
   }
 
   .credit-result {
     display: none;
-    border: 1px solid var(--border);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius);
     overflow: hidden;
     margin-top: 16px;
   }
-
   .credit-result.show { display: block; }
 
   .credit-result-header {
@@ -733,16 +718,16 @@
   }
 
   .credit-result-body {
-    padding: 16px;
+    padding: 18px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
+    background: var(--surface2);
   }
 
-  .credit-metric {}
   .credit-metric-label {
-    font-family: var(--mono);
     font-size: 9px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text3);
@@ -750,31 +735,27 @@
   }
   .credit-metric-value {
     font-family: var(--display);
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--text);
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--navy);
   }
   .credit-metric-sub {
-    font-family: var(--mono);
     font-size: 10px;
     color: var(--text3);
     margin-top: 1px;
+    font-weight: 400;
   }
 
-  /* Summary / review */
-  .summary-section {
-    margin-bottom: 20px;
-  }
-
+  /* ── SUMMARY / REVIEW ── */
   .summary-label {
-    font-family: var(--mono);
     font-size: 9px;
+    font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--text3);
     padding: 0 0 10px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 14px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 12px;
   }
 
   .summary-row {
@@ -782,46 +763,43 @@
     justify-content: space-between;
     align-items: baseline;
     padding: 7px 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--surface2);
   }
-
   .summary-row:last-child { border-bottom: none; }
 
   .summary-key {
-    font-family: var(--mono);
     font-size: 11px;
-    color: var(--text3);
+    font-weight: 500;
+    color: var(--text2);
     min-width: 160px;
   }
 
   .summary-val {
     font-size: 12px;
-    color: var(--text);
+    font-weight: 600;
+    color: var(--navy);
     text-align: right;
-    font-weight: 400;
   }
 
-  .summary-val.highlight { color: var(--accent); font-family: var(--mono); }
+  .summary-val.highlight { color: var(--teal); }
 
   .status-badge {
-    font-family: var(--mono);
     font-size: 10px;
-    padding: 2px 8px;
+    font-weight: 700;
+    padding: 2px 9px;
     border-radius: 4px;
-    font-weight: 500;
+    letter-spacing: 0.2px;
   }
+  .badge-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(29,184,122,0.2); }
+  .badge-warn  { background: var(--warn-dim);  color: var(--warn);  border: 1px solid rgba(224,123,27,0.2); }
+  .badge-red   { background: var(--red-dim);   color: var(--red);   border: 1px solid rgba(224,59,90,0.2);  }
+  .badge-blue  { background: var(--accent-dim); color: var(--blue);  border: 1px solid rgba(19,113,191,0.2); }
 
-  .badge-green { background: var(--green-dim); color: var(--green); }
-  .badge-warn { background: var(--warn-dim); color: var(--warn); }
-  .badge-red { background: var(--red-dim); color: var(--red); }
-  .badge-blue { background: var(--accent-dim); color: var(--accent); }
-
-  /* Quote ID display */
+  /* ── QUOTE ID ── */
   .quote-id-block {
-    background: var(--surface2);
-    border: 1px solid var(--border2);
+    background: var(--navy);
     border-radius: var(--radius);
-    padding: 12px 16px;
+    padding: 14px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -829,35 +807,36 @@
   }
 
   .qid-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
-    margin-bottom: 2px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 3px;
   }
 
   .qid-value {
-    font-family: var(--mono);
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--accent);
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--cyan);
     letter-spacing: 1px;
   }
 
   .qid-date {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
     text-align: right;
+    font-weight: 400;
   }
 
-  /* Action buttons */
+  /* ── ACTIONS BAR ── */
   .actions-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 24px;
-    margin-top: 8px;
-    border-top: 1px solid var(--border);
+    padding-top: 22px;
+    margin-top: 4px;
+    border-top: 1.5px solid var(--border);
   }
 
   .btn {
@@ -865,95 +844,49 @@
     border-radius: var(--radius);
     font-family: var(--sans);
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     border: none;
-    transition: all 0.2s;
+    transition: all 0.18s;
     display: flex;
     align-items: center;
     gap: 7px;
+    letter-spacing: 0.1px;
   }
 
   .btn-ghost {
     background: transparent;
-    border: 1px solid var(--border2);
+    border: 1.5px solid var(--border2);
     color: var(--text2);
   }
-  .btn-ghost:hover { background: var(--surface2); color: var(--text); }
+  .btn-ghost:hover { background: var(--surface2); border-color: var(--border2); color: var(--navy); }
 
   .btn-primary {
-    background: var(--accent);
-    color: var(--bg);
-    font-weight: 600;
+    background: var(--navy);
+    color: white;
+    font-weight: 700;
   }
-  .btn-primary:hover { background: #33ddff; box-shadow: 0 0 20px var(--accent-glow); }
+  .btn-primary:hover { background: #162038; box-shadow: 0 3px 12px rgba(31,42,68,0.25); }
 
   .btn-extract {
-    background: var(--gold);
-    color: var(--bg);
-    font-weight: 600;
+    background: var(--blue);
+    color: white;
+    font-weight: 700;
   }
-  .btn-extract:hover { background: #f7d060; }
+  .btn-extract:hover { background: #0f5fa3; box-shadow: 0 3px 12px rgba(19,113,191,0.3); }
+  .btn-extract:disabled { opacity: 0.35; cursor: not-allowed; box-shadow: none; }
 
   .btn-submit {
-    background: var(--green);
-    color: var(--bg);
-    font-weight: 700;
+    background: linear-gradient(135deg, var(--teal), var(--cyan));
+    color: var(--navy);
+    font-weight: 800;
     padding: 11px 28px;
   }
-  .btn-submit:hover { background: #33ebb3; box-shadow: 0 0 20px var(--green-dim); }
+  .btn-submit:hover { box-shadow: 0 4px 16px rgba(40,181,181,0.4); transform: translateY(-1px); }
 
   .btn-right-group { display: flex; gap: 8px; }
 
-  /* Success screen */
-  .success-screen {
-    text-align: center;
-    padding: 60px 40px;
-  }
-
-  .success-icon {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    background: var(--green-dim);
-    border: 2px solid var(--green);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 28px;
-    margin: 0 auto 24px;
-    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  @keyframes popIn {
-    from { transform: scale(0); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-
-  .success-title {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 24px;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-
-  .success-sub {
-    font-size: 14px;
-    color: var(--text2);
-    margin-bottom: 32px;
-    line-height: 1.6;
-  }
-
-  .success-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius2);
-    padding: 24px;
-    text-align: left;
-    margin-bottom: 24px;
-    max-width: 480px;
-    margin-left: auto; margin-right: auto;
-  }
-
-  /* Alert banner */
+  /* ── ALERTS ── */
   .alert {
     display: flex;
     align-items: flex-start;
@@ -962,33 +895,34 @@
     border-radius: var(--radius);
     margin-bottom: 16px;
     font-size: 12px;
+    font-weight: 500;
     line-height: 1.5;
   }
+  .alert-warn { background: var(--warn-dim); border: 1px solid rgba(224,123,27,0.25); color: var(--warn); }
+  .alert-info { background: rgba(19,113,191,0.07); border: 1px solid rgba(19,113,191,0.2); color: var(--blue); }
 
-  .alert-warn { background: var(--warn-dim); border: 1px solid rgba(255,149,0,0.2); color: var(--warn); }
-  .alert-info { background: var(--accent-dim); border: 1px solid rgba(0,212,255,0.15); color: var(--accent); }
-
-  /* Confidence bar */
+  /* ── CONFIDENCE BARS ── */
   .confidence-row {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--surface2);
   }
 
   .confidence-label {
-    font-family: var(--mono);
     font-size: 10px;
-    color: var(--text3);
+    font-weight: 500;
+    color: var(--text2);
     white-space: nowrap;
+    min-width: 170px;
   }
 
   .confidence-bar {
     flex: 1;
-    height: 4px;
-    background: var(--border2);
+    height: 5px;
+    background: var(--surface2);
     border-radius: 99px;
     overflow: hidden;
   }
@@ -1000,42 +934,14 @@
   }
 
   .confidence-pct {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 500;
+    font-size: 11px;
+    font-weight: 700;
     white-space: nowrap;
+    min-width: 36px;
+    text-align: right;
   }
 
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
-
-  /* Progress line at top */
-  .progress-track {
-    position: fixed;
-    top: 52px; left: 0; right: 0;
-    height: 2px;
-    background: var(--border);
-    z-index: 99;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent2), var(--accent));
-    transition: width 0.4s ease;
-    box-shadow: 0 0 8px var(--accent);
-  }
-
-  /* Tooltip chip */
-  .field-hint {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
-    margin-top: 3px;
-  }
-
-  /* Table for cargo items */
+  /* ── CARGO TABLE ── */
   .cargo-table {
     width: 100%;
     border-collapse: collapse;
@@ -1043,31 +949,35 @@
   }
 
   .cargo-table th {
-    font-family: var(--mono);
     font-size: 9px;
-    letter-spacing: 1px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
     color: var(--text3);
     padding: 8px 10px;
     text-align: left;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
+    background: var(--surface2);
   }
 
   .cargo-table td {
-    padding: 6px 10px;
-    border-bottom: 1px solid var(--border);
+    padding: 5px 8px;
+    border-bottom: 1px solid var(--surface2);
   }
+
+  .cargo-table tr:hover td { background: rgba(40,181,181,0.03); }
 
   .cargo-table input {
     padding: 6px 8px;
     font-size: 12px;
     background: transparent;
-    border: 1px solid transparent;
+    border: 1.5px solid transparent;
+    border-radius: 5px;
   }
-
   .cargo-table input:focus {
-    background: var(--surface2);
-    border-color: var(--accent);
+    background: white;
+    border-color: var(--teal);
+    box-shadow: none;
   }
 
   .add-row-btn {
@@ -1075,20 +985,84 @@
     align-items: center;
     gap: 6px;
     background: none;
-    border: 1px dashed var(--border2);
+    border: 1.5px dashed var(--border2);
     color: var(--text3);
-    font-family: var(--mono);
+    font-family: var(--sans);
     font-size: 11px;
+    font-weight: 600;
     padding: 8px 14px;
     border-radius: var(--radius);
     cursor: pointer;
     margin-top: 8px;
-    transition: all 0.2s;
+    transition: all 0.18s;
     width: 100%;
     justify-content: center;
   }
+  .add-row-btn:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-dim); }
 
-  .add-row-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+  .field-hint {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text3);
+    margin-top: 2px;
+  }
+
+  /* ── SUCCESS ── */
+  .success-screen {
+    text-align: center;
+    padding: 56px 40px;
+  }
+
+  .success-icon {
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    background: var(--green-dim);
+    border: 2px solid var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 22px;
+    animation: popIn 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  .success-title {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .success-sub {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text2);
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  .success-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius2);
+    padding: 22px;
+    text-align: left;
+    margin-bottom: 24px;
+    max-width: 460px;
+    margin-left: auto; margin-right: auto;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+
+  /* ── TEAL ACCENT LINE on active card ── */
+  .card.highlighted { border-left: 3px solid var(--teal); }
 </style>
 </head>
 <body>
@@ -1096,8 +1070,9 @@
 <!-- Platform bar -->
 <header class="platform-bar">
   <div class="platform-logo">
-    ◈ Trade<span>Desk</span>
-    <span class="logo-badge">SUITE</span>
+    <img src="Aulintri Bluelogo_whitetxt.png" alt="Aulintri Logo">
+    <div class="logo-divider"></div>
+    <span class="logo-badge">Suite</span>
   </div>
   <nav class="platform-nav">
     <div class="nav-item">Dashboard</div>
@@ -1117,7 +1092,7 @@
 
 <!-- Progress bar -->
 <div class="progress-track">
-  <div class="progress-fill" id="progress-fill" style="width: 25%"></div>
+  <div class="progress-fill" id="progress-fill" style="width:25%"></div>
 </div>
 
 <div class="app-container">
@@ -1128,7 +1103,7 @@
     <div class="step-item active" id="step-nav-1" onclick="goToStep(1)">
       <div class="step-dot" id="step-dot-1">1</div>
       <div class="step-text">
-        <div class="step-title">Upload & Extract</div>
+        <div class="step-title">Upload &amp; Extract</div>
         <div class="step-sub">Upload RFQ document</div>
       </div>
     </div>
@@ -1144,15 +1119,15 @@
     <div class="step-item" id="step-nav-3" onclick="goToStep(3)">
       <div class="step-dot" id="step-dot-3">3</div>
       <div class="step-text">
-        <div class="step-title">Customer & Credit</div>
-        <div class="step-sub">Credit check & terms</div>
+        <div class="step-title">Customer &amp; Credit</div>
+        <div class="step-sub">Credit check &amp; terms</div>
       </div>
     </div>
 
     <div class="step-item" id="step-nav-4" onclick="goToStep(4)">
       <div class="step-dot" id="step-dot-4">4</div>
       <div class="step-text">
-        <div class="step-title">Review & Submit</div>
+        <div class="step-title">Review &amp; Submit</div>
         <div class="step-sub">Confirm and send</div>
       </div>
     </div>
@@ -1166,13 +1141,12 @@
         <span>›</span>
         <span class="crumb current">New Quote Request</span>
       </div>
-      <h1 class="page-title">New <span>Quote Request</span></h1>
+      <h1 class="page-title"><span>Quote Request</span></h1>
       <p class="page-sub">Upload a customer RFQ, extract details automatically with AI, verify cargo info, run credit check, and submit for pricing.</p>
     </div>
 
     <!-- STEP 1: Upload & Extract -->
     <div class="step-panel active" id="panel-1">
-
       <div class="card">
         <div class="card-header">
           <div class="card-title">
@@ -1183,7 +1157,7 @@
         </div>
 
         <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
-          <div class="upload-icon">📂</div>
+          <span class="upload-icon">📂</span>
           <div class="upload-title">Drop your RFQ document here</div>
           <div class="upload-sub">or click to browse files</div>
           <div class="upload-types">
@@ -1215,7 +1189,6 @@
         </div>
       </div>
 
-      <!-- Optional: manual entry callout -->
       <div class="alert alert-info">
         <span>ℹ</span>
         <div>Don't have a document? You can <strong>skip upload</strong> and manually fill in all quote details in the next steps.</div>
@@ -1231,50 +1204,28 @@
 
     <!-- STEP 2: Shipment Details -->
     <div class="step-panel" id="panel-2">
-
       <div class="card">
         <div class="card-header">
-          <div class="card-title">
-            <div class="icon">🚢</div>
-            Service Type
-          </div>
+          <div class="card-title"><div class="icon">🚢</div>Service Type</div>
         </div>
         <div class="form-grid cols-1">
           <div class="form-group">
             <label>Service Mode <span class="required">*</span></label>
             <div class="radio-group">
-              <label class="radio-option" onclick="selectRadio(this, 'mode')">
-                <input type="radio" name="mode" value="ocean-fcl"> 🚢 Ocean FCL
-              </label>
-              <label class="radio-option" onclick="selectRadio(this, 'mode')">
-                <input type="radio" name="mode" value="ocean-lcl"> 📦 Ocean LCL
-              </label>
-              <label class="radio-option" onclick="selectRadio(this, 'mode')">
-                <input type="radio" name="mode" value="air"> ✈️ Air Freight
-              </label>
-              <label class="radio-option" onclick="selectRadio(this, 'mode')">
-                <input type="radio" name="mode" value="drayage"> 🚛 Drayage
-              </label>
-              <label class="radio-option" onclick="selectRadio(this, 'mode')">
-                <input type="radio" name="mode" value="multimodal"> 🔗 Multimodal
-              </label>
+              <label class="radio-option" onclick="selectRadio(this,'mode')"><input type="radio" name="mode" value="ocean-fcl"> 🚢 Ocean FCL</label>
+              <label class="radio-option" onclick="selectRadio(this,'mode')"><input type="radio" name="mode" value="ocean-lcl"> 📦 Ocean LCL</label>
+              <label class="radio-option" onclick="selectRadio(this,'mode')"><input type="radio" name="mode" value="air"> ✈️ Air Freight</label>
+              <label class="radio-option" onclick="selectRadio(this,'mode')"><input type="radio" name="mode" value="drayage"> 🚛 Drayage</label>
+              <label class="radio-option" onclick="selectRadio(this,'mode')"><input type="radio" name="mode" value="multimodal"> 🔗 Multimodal</label>
             </div>
           </div>
           <div class="form-group">
             <label>Trade Lane <span class="required">*</span></label>
             <div class="radio-group">
-              <label class="radio-option selected" onclick="selectRadio(this, 'lane')">
-                <input type="radio" name="lane" value="import" checked> Import
-              </label>
-              <label class="radio-option" onclick="selectRadio(this, 'lane')">
-                <input type="radio" name="lane" value="export"> Export
-              </label>
-              <label class="radio-option" onclick="selectRadio(this, 'lane')">
-                <input type="radio" name="lane" value="domestic"> Domestic
-              </label>
-              <label class="radio-option" onclick="selectRadio(this, 'lane')">
-                <input type="radio" name="lane" value="crossborder"> Cross-Border
-              </label>
+              <label class="radio-option selected" onclick="selectRadio(this,'lane')"><input type="radio" name="lane" value="import" checked> Import</label>
+              <label class="radio-option" onclick="selectRadio(this,'lane')"><input type="radio" name="lane" value="export"> Export</label>
+              <label class="radio-option" onclick="selectRadio(this,'lane')"><input type="radio" name="lane" value="domestic"> Domestic</label>
+              <label class="radio-option" onclick="selectRadio(this,'lane')"><input type="radio" name="lane" value="crossborder"> Cross-Border</label>
             </div>
           </div>
         </div>
@@ -1282,23 +1233,20 @@
 
       <div class="card">
         <div class="card-header">
-          <div class="card-title">
-            <div class="icon">📍</div>
-            Origin & Destination
-          </div>
+          <div class="card-title"><div class="icon">📍</div>Origin &amp; Destination</div>
         </div>
         <div class="form-grid">
           <div class="form-group">
             <label>Port / Place of Loading <span class="ai-tag">AI</span> <span class="required">*</span></label>
-            <input type="text" id="f-pol" class="ai-filled" placeholder="e.g. CNSHA – Shanghai" value="CNSHA – Shanghai, China">
+            <input type="text" id="f-pol" class="ai-filled" value="CNSHA – Shanghai, China">
           </div>
           <div class="form-group">
             <label>Port / Place of Discharge <span class="ai-tag">AI</span> <span class="required">*</span></label>
-            <input type="text" id="f-pod" class="ai-filled" placeholder="e.g. USLAX – Los Angeles" value="USLAX – Los Angeles, CA">
+            <input type="text" id="f-pod" class="ai-filled" value="USLAX – Los Angeles, CA">
           </div>
           <div class="form-group">
             <label>Place of Receipt</label>
-            <input type="text" id="f-por" class="ai-filled" placeholder="If different from POL" value="Shenzhen Factory – Gate">
+            <input type="text" id="f-por" class="ai-filled" value="Shenzhen Factory – Gate">
           </div>
           <div class="form-group">
             <label>Place of Delivery</label>
@@ -1318,7 +1266,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Requested Cargo Readiness</label>
+            <label>Cargo Readiness Date</label>
             <input type="date" id="f-ready">
           </div>
         </div>
@@ -1326,10 +1274,7 @@
 
       <div class="card">
         <div class="card-header">
-          <div class="card-title">
-            <div class="icon">📦</div>
-            Cargo Details
-          </div>
+          <div class="card-title"><div class="icon">📦</div>Cargo Details</div>
           <span class="card-badge badge-ai">✦ AI Parsed</span>
         </div>
 
@@ -1337,8 +1282,8 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>Description <span class="ai-tag">AI</span></th>
-              <th>HTS Code <span class="ai-tag">AI</span></th>
+              <th>Description <span class="ai-tag" style="font-size:8px">AI</span></th>
+              <th>HTS Code <span class="ai-tag" style="font-size:8px">AI</span></th>
               <th>Qty</th>
               <th>Unit</th>
               <th>Weight (kg)</th>
@@ -1349,23 +1294,18 @@
           </thead>
           <tbody id="cargo-body">
             <tr>
-              <td style="font-family:var(--mono);font-size:11px;color:var(--text3);">01</td>
+              <td style="font-size:11px;font-weight:700;color:var(--text3);">01</td>
               <td><input type="text" value="Industrial Pumps — Stainless Steel"></td>
-              <td><input type="text" value="8413.70.2004" style="font-family:var(--mono);font-size:11px;"></td>
+              <td><input type="text" value="8413.70.2004" style="font-size:11px;"></td>
               <td><input type="number" value="24" style="width:60px"></td>
-              <td>
-                <select style="width:70px;font-size:11px;padding:6px 4px;">
-                  <option>CTNS</option><option>PKGS</option><option>PLTS</option><option selected>PCS</option>
-                </select>
-              </td>
+              <td><select style="width:72px;font-size:11px;padding:6px 4px;"><option>CTNS</option><option>PKGS</option><option>PLTS</option><option selected>PCS</option></select></td>
               <td><input type="number" value="1440" style="width:80px"></td>
               <td><input type="number" value="6.8" style="width:60px"></td>
               <td><input type="number" value="28800" style="width:90px"></td>
-              <td><button onclick="removeRow(this)" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;">×</button></td>
+              <td><button onclick="removeRow(this)" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;padding:2px 6px;">×</button></td>
             </tr>
           </tbody>
         </table>
-
         <button class="add-row-btn" onclick="addCargoRow()">＋ Add Cargo Line</button>
 
         <hr class="form-divider">
@@ -1373,56 +1313,36 @@
         <div class="form-grid cols-3">
           <div class="form-group">
             <label>Dangerous Goods?</label>
-            <select>
-              <option value="no">No</option>
-              <option value="yes">Yes — IMDG/IATA</option>
-              <option value="ltd">Limited Quantity</option>
-            </select>
+            <select><option value="no">No</option><option value="yes">Yes — IMDG/IATA</option><option value="ltd">Limited Quantity</option></select>
           </div>
           <div class="form-group">
             <label>Temperature Control</label>
-            <select>
-              <option value="no">Ambient / Standard</option>
-              <option value="reefer">Reefer Required</option>
-              <option value="chill">Chilled (2–8°C)</option>
-              <option value="frozen">Frozen (−18°C)</option>
-            </select>
+            <select><option>Ambient / Standard</option><option>Reefer Required</option><option>Chilled (2–8°C)</option><option>Frozen (−18°C)</option></select>
           </div>
           <div class="form-group">
             <label>Insurance Required?</label>
-            <select>
-              <option value="no">No</option>
-              <option value="yes">Yes — All Risk</option>
-              <option value="basic">Basic / FOB</option>
-            </select>
+            <select><option>No</option><option>Yes — All Risk</option><option>Basic / FOB</option></select>
           </div>
         </div>
 
         <hr class="form-divider">
-
-        <div class="form-group" style="margin-top:4px;">
+        <div class="form-group">
           <label>Special Instructions / Notes <span class="ai-tag">AI</span></label>
-          <textarea id="f-notes" class="ai-filled">Customer requires liftgate delivery at destination. ISF filing to be completed by TradeDesk CHB team. Notify 48hrs before port arrival.</textarea>
+          <textarea id="f-notes" class="ai-filled">Customer requires liftgate delivery at destination. ISF filing to be completed by Aulintri CHB team. Notify 48hrs before port arrival.</textarea>
         </div>
       </div>
 
       <div class="actions-bar">
         <button class="btn btn-ghost" onclick="goToStep(1)">← Back</button>
-        <div class="btn-right-group">
-          <button class="btn btn-primary" onclick="goToStep(3)">Continue → Customer & Credit</button>
-        </div>
+        <button class="btn btn-primary" onclick="goToStep(3)">Continue → Customer &amp; Credit</button>
       </div>
     </div>
 
     <!-- STEP 3: Customer & Credit -->
     <div class="step-panel" id="panel-3">
-
       <div class="card">
         <div class="card-header">
-          <div class="card-title">
-            <div class="icon">🏢</div>
-            Customer Information
-          </div>
+          <div class="card-title"><div class="icon">🏢</div>Customer Information</div>
         </div>
         <div class="form-grid">
           <div class="form-group">
@@ -1446,18 +1366,16 @@
             <input type="text" id="f-address" placeholder="Street, City, State, ZIP, Country">
           </div>
         </div>
-
         <hr class="form-divider">
-
         <div class="form-grid cols-3">
           <div class="form-group">
             <label>IRS / EIN <span class="required">*</span></label>
-            <input type="text" id="f-ein" placeholder="XX-XXXXXXX" style="font-family:var(--mono)">
-            <div class="field-hint">Used for CBP bond & credit check</div>
+            <input type="text" id="f-ein" placeholder="XX-XXXXXXX">
+            <div class="field-hint">Used for CBP bond &amp; credit check</div>
           </div>
           <div class="form-group">
             <label>CBP Importer ID</label>
-            <input type="text" id="f-cbp" placeholder="IRS EIN or SSN-based" style="font-family:var(--mono)">
+            <input type="text" id="f-cbp" placeholder="IRS EIN or SSN-based">
           </div>
           <div class="form-group">
             <label>Existing Client?</label>
@@ -1476,7 +1394,7 @@
           <div class="credit-icon">💳</div>
           <div class="credit-info">
             <div class="credit-title">Credit Check</div>
-            <div class="credit-sub">D&B / Experian / Internal scoring · Automated API lookup</div>
+            <div class="credit-sub">D&amp;B / Experian / Internal scoring · Automated API lookup</div>
           </div>
           <button class="credit-run-btn" id="credit-btn" onclick="runCreditCheck()">▶ Run Credit Check</button>
         </div>
@@ -1489,31 +1407,27 @@
           <div class="form-group">
             <label>Payment Terms</label>
             <select id="f-terms">
-              <option>Net 30</option>
-              <option>Net 45</option>
-              <option>Net 60</option>
-              <option>Prepay</option>
-              <option>COD</option>
-              <option>CIA</option>
+              <option>Net 30</option><option>Net 45</option><option>Net 60</option>
+              <option>Prepay</option><option>COD</option><option>CIA</option>
             </select>
           </div>
           <div class="form-group">
             <label>DUNS Number (if known)</label>
-            <input type="text" id="f-duns" placeholder="000000000" style="font-family:var(--mono)">
+            <input type="text" id="f-duns" placeholder="000000000">
           </div>
         </div>
 
         <div class="credit-result" id="credit-result">
           <div class="credit-result-header" id="credit-result-header">
             <div class="credit-status-dot" id="credit-dot"></div>
-            <div style="font-family:var(--display);font-weight:600;font-size:13px;" id="credit-status-text"></div>
-            <div style="margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--text3);" id="credit-run-time"></div>
+            <div style="font-weight:700;font-size:13px;" id="credit-status-text"></div>
+            <div style="margin-left:auto;font-size:10px;color:var(--text3);" id="credit-run-time"></div>
           </div>
           <div class="credit-result-body">
             <div class="credit-metric">
               <div class="credit-metric-label">Credit Score</div>
               <div class="credit-metric-value" id="cm-score">—</div>
-              <div class="credit-metric-sub" id="cm-score-sub">D&B PAYDEX</div>
+              <div class="credit-metric-sub">D&amp;B PAYDEX</div>
             </div>
             <div class="credit-metric">
               <div class="credit-metric-label">Recommended Limit</div>
@@ -1523,7 +1437,7 @@
             <div class="credit-metric">
               <div class="credit-metric-label">Risk Rating</div>
               <div class="credit-metric-value" id="cm-risk">—</div>
-              <div class="credit-metric-sub" id="cm-risk-sub">Internal model</div>
+              <div class="credit-metric-sub">Internal model</div>
             </div>
             <div class="credit-metric">
               <div class="credit-metric-label">Approved Terms</div>
@@ -1534,47 +1448,30 @@
         </div>
 
         <div id="credit-ai-status" class="ai-status">
-          <div class="ai-spinner" style="border-top-color:var(--gold)"></div>
+          <div class="ai-spinner"></div>
           <div class="ai-status-text">
             <strong>Running credit check…</strong>
-            <span id="credit-status-detail">Querying D&B · Experian Commercial · Internal history</span>
+            <span id="credit-status-detail">Querying D&amp;B · Experian Commercial · Internal history</span>
           </div>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <div class="card-title">
-            <div class="icon">📋</div>
-            Quote Configuration
-          </div>
+          <div class="card-title"><div class="icon">📋</div>Quote Configuration</div>
         </div>
         <div class="form-grid">
           <div class="form-group">
             <label>Quote Valid For</label>
-            <select>
-              <option>7 days</option>
-              <option selected>14 days</option>
-              <option>30 days</option>
-              <option>60 days</option>
-            </select>
+            <select><option>7 days</option><option selected>14 days</option><option>30 days</option><option>60 days</option></select>
           </div>
           <div class="form-group">
             <label>Priority / SLA</label>
-            <select>
-              <option>Standard (48–72 hrs)</option>
-              <option>Urgent (24 hrs)</option>
-              <option>Same Day</option>
-            </select>
+            <select><option>Standard (48–72 hrs)</option><option>Urgent (24 hrs)</option><option>Same Day</option></select>
           </div>
           <div class="form-group">
             <label>Assigned To</label>
-            <select>
-              <option>Auto-assign</option>
-              <option>Minh N. (Me)</option>
-              <option>J. Rodriguez — Drayage</option>
-              <option>K. Park — Ocean</option>
-            </select>
+            <select><option>Auto-assign</option><option>Minh N. (Me)</option><option>J. Rodriguez — Drayage</option><option>K. Park — Ocean</option></select>
           </div>
           <div class="form-group">
             <label>Internal Reference</label>
@@ -1585,16 +1482,15 @@
 
       <div class="actions-bar">
         <button class="btn btn-ghost" onclick="goToStep(2)">← Back</button>
-        <button class="btn btn-primary" onclick="goToStep(4)">Continue → Review & Submit</button>
+        <button class="btn btn-primary" onclick="goToStep(4)">Continue → Review &amp; Submit</button>
       </div>
     </div>
 
     <!-- STEP 4: Review & Submit -->
     <div class="step-panel" id="panel-4">
-
       <div class="quote-id-block">
         <div>
-          <div class="qid-label">DRAFT QUOTE ID</div>
+          <div class="qid-label">Draft Quote ID</div>
           <div class="qid-value" id="quote-id">QR-2026-03847</div>
         </div>
         <div class="qid-date" id="quote-date"></div>
@@ -1602,84 +1498,38 @@
 
       <div class="card">
         <div class="summary-label">Shipment Summary</div>
-
         <div class="summary-section">
-          <div class="summary-row">
-            <div class="summary-key">Service Mode</div>
-            <div class="summary-val highlight">Ocean FCL · Import</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Origin</div>
-            <div class="summary-val">CNSHA – Shanghai, China</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Destination</div>
-            <div class="summary-val">USLAX – Los Angeles, CA</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Incoterms</div>
-            <div class="summary-val highlight">FOB</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Commodity</div>
-            <div class="summary-val">Industrial Pumps — HTS 8413.70.2004</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Cargo</div>
-            <div class="summary-val">24 PCS · 1,440 kg · 6.8 CBM</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Declared Value</div>
-            <div class="summary-val">USD 28,800.00</div>
-          </div>
+          <div class="summary-row"><div class="summary-key">Service Mode</div><div class="summary-val highlight">Ocean FCL · Import</div></div>
+          <div class="summary-row"><div class="summary-key">Origin</div><div class="summary-val">CNSHA – Shanghai, China</div></div>
+          <div class="summary-row"><div class="summary-key">Destination</div><div class="summary-val">USLAX – Los Angeles, CA</div></div>
+          <div class="summary-row"><div class="summary-key">Incoterms</div><div class="summary-val highlight">FOB</div></div>
+          <div class="summary-row"><div class="summary-key">Commodity</div><div class="summary-val">Industrial Pumps — HTS 8413.70.2004</div></div>
+          <div class="summary-row"><div class="summary-key">Cargo</div><div class="summary-val">24 PCS · 1,440 kg · 6.8 CBM</div></div>
+          <div class="summary-row"><div class="summary-key">Declared Value</div><div class="summary-val">USD 28,800.00</div></div>
         </div>
 
-        <div class="summary-label" style="margin-top:20px">Customer & Credit</div>
-
+        <div class="summary-label" style="margin-top:20px">Customer &amp; Credit</div>
         <div class="summary-section">
-          <div class="summary-row">
-            <div class="summary-key">Customer</div>
-            <div class="summary-val">Precision Flow Systems, Inc.</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Contact</div>
-            <div class="summary-val">Sarah Delacroix · s.delacroix@precisionflow.com</div>
-          </div>
+          <div class="summary-row"><div class="summary-key">Customer</div><div class="summary-val">Precision Flow Systems, Inc.</div></div>
+          <div class="summary-row"><div class="summary-key">Contact</div><div class="summary-val">Sarah Delacroix · s.delacroix@precisionflow.com</div></div>
           <div class="summary-row">
             <div class="summary-key">Credit Status</div>
-            <div class="summary-val">
-              <span class="status-badge badge-green" id="review-credit-status">✓ Approved</span>
-            </div>
+            <div class="summary-val"><span class="status-badge badge-green" id="review-credit-status">✓ Approved</span></div>
           </div>
-          <div class="summary-row">
-            <div class="summary-key">Payment Terms</div>
-            <div class="summary-val">Net 30</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Quote Validity</div>
-            <div class="summary-val">14 days from submission</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Assigned To</div>
-            <div class="summary-val">Minh N.</div>
-          </div>
+          <div class="summary-row"><div class="summary-key">Payment Terms</div><div class="summary-val">Net 30</div></div>
+          <div class="summary-row"><div class="summary-key">Quote Validity</div><div class="summary-val">14 days from submission</div></div>
+          <div class="summary-row"><div class="summary-key">Assigned To</div><div class="summary-val">Minh N.</div></div>
         </div>
 
         <div class="summary-label" style="margin-top:20px">AI Extraction Confidence</div>
-
         <div class="confidence-row">
           <div class="confidence-label">Overall extraction confidence</div>
-          <div class="confidence-bar">
-            <div class="confidence-fill" style="width:87%;background:linear-gradient(90deg,var(--accent2),var(--green))"></div>
-          </div>
-          <div class="confidence-pct" style="color:var(--green)">87%</div>
+          <div class="confidence-bar"><div class="confidence-fill" style="width:87%;background:linear-gradient(90deg,var(--teal),var(--cyan))"></div></div>
+          <div class="confidence-pct" style="color:var(--teal)">87%</div>
         </div>
-
         <div class="confidence-row">
           <div class="confidence-label">Fields verified by user</div>
-          <div class="confidence-bar">
-            <div class="confidence-fill" style="width:100%;background:var(--green)"></div>
-          </div>
+          <div class="confidence-bar"><div class="confidence-fill" style="width:100%;background:var(--green)"></div></div>
           <div class="confidence-pct" style="color:var(--green)">12/12</div>
         </div>
       </div>
@@ -1692,7 +1542,7 @@
       <div class="actions-bar">
         <button class="btn btn-ghost" onclick="goToStep(3)">← Back</button>
         <div class="btn-right-group">
-          <button class="btn btn-ghost" onclick="">⬇ Save Draft</button>
+          <button class="btn btn-ghost">⬇ Save Draft</button>
           <button class="btn btn-submit" onclick="submitQuote()">✓ Submit Quote Request</button>
         </div>
       </div>
@@ -1706,26 +1556,11 @@
         <div class="success-sub">Your quote request has been received and assigned to the pricing team.<br>You'll be notified when a quote is ready — typically within 24–48 hours.</div>
 
         <div class="success-card">
-          <div class="summary-row">
-            <div class="summary-key">Quote Request ID</div>
-            <div class="summary-val highlight">QR-2026-03847</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Customer</div>
-            <div class="summary-val">Precision Flow Systems, Inc.</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Route</div>
-            <div class="summary-val">CNSHA → USLAX</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Status</div>
-            <div class="summary-val"><span class="status-badge badge-blue">Pending Pricing</span></div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-key">Submitted</div>
-            <div class="summary-val" id="success-time">—</div>
-          </div>
+          <div class="summary-row"><div class="summary-key">Quote Request ID</div><div class="summary-val highlight">QR-2026-03847</div></div>
+          <div class="summary-row"><div class="summary-key">Customer</div><div class="summary-val">Precision Flow Systems, Inc.</div></div>
+          <div class="summary-row"><div class="summary-key">Route</div><div class="summary-val">CNSHA → USLAX</div></div>
+          <div class="summary-row"><div class="summary-key">Status</div><div class="summary-val"><span class="status-badge badge-blue">Pending Pricing</span></div></div>
+          <div class="summary-row"><div class="summary-key">Submitted</div><div class="summary-val" id="success-time">—</div></div>
         </div>
 
         <div style="display:flex;gap:12px;justify-content:center">
@@ -1743,64 +1578,45 @@
   let fileSelected = false;
   let creditChecked = false;
 
-  const PROGRESS = { 1: 25, 2: 50, 3: 75, 4: 95, 5: 100 };
+  const PROGRESS = { 1:25, 2:50, 3:75, 4:95, 5:100 };
 
   function goToStep(n) {
     if (n < 1 || n > 5) return;
     document.getElementById(`panel-${currentStep}`).classList.remove('active');
     document.getElementById(`step-nav-${currentStep}`)?.classList.remove('active');
-
     currentStep = n;
     document.getElementById(`panel-${n}`).classList.add('active');
-
-    // Update sidebar nav
     for (let i = 1; i <= 4; i++) {
       const nav = document.getElementById(`step-nav-${i}`);
       const dot = document.getElementById(`step-dot-${i}`);
       if (!nav) continue;
-      nav.classList.remove('active', 'done');
-      if (i < n) {
-        nav.classList.add('done');
-        dot.innerHTML = '✓';
-      } else if (i === n) {
-        nav.classList.add('active');
-        dot.innerHTML = i;
-      } else {
-        dot.innerHTML = i;
-      }
+      nav.classList.remove('active','done');
+      if (i < n) { nav.classList.add('done'); dot.innerHTML = '✓'; }
+      else if (i === n) { nav.classList.add('active'); dot.innerHTML = i; }
+      else { dot.innerHTML = i; }
     }
-
     document.getElementById('progress-fill').style.width = PROGRESS[n] + '%';
-
     if (n === 4) buildReview();
+    window.scrollTo({top:0,behavior:'smooth'});
   }
 
-  // ── FILE UPLOAD ──
-  function handleDragOver(e) {
-    e.preventDefault();
-    document.getElementById('upload-zone').classList.add('drag-over');
-  }
-  function handleDragLeave(e) {
-    document.getElementById('upload-zone').classList.remove('drag-over');
-  }
+  function handleDragOver(e) { e.preventDefault(); document.getElementById('upload-zone').classList.add('drag-over'); }
+  function handleDragLeave(e) { document.getElementById('upload-zone').classList.remove('drag-over'); }
   function handleDrop(e) {
     e.preventDefault();
     document.getElementById('upload-zone').classList.remove('drag-over');
     const file = e.dataTransfer.files[0];
     if (file) processFile(file);
   }
-  function handleFileSelect(e) {
-    const file = e.target.files[0];
-    if (file) processFile(file);
-  }
+  function handleFileSelect(e) { const file = e.target.files[0]; if (file) processFile(file); }
 
   function processFile(file) {
     fileSelected = true;
     const ext = file.name.split('.').pop().toUpperCase();
-    const icons = { PDF: '📄', DOCX: '📝', XLSX: '📊', CSV: '📊', PNG: '🖼', JPG: '🖼', JPEG: '🖼', EML: '📧' };
+    const icons = {PDF:'📄',DOCX:'📝',XLSX:'📊',CSV:'📊',PNG:'🖼',JPG:'🖼',JPEG:'🖼',EML:'📧'};
     document.getElementById('file-icon').textContent = icons[ext] || '📄';
     document.getElementById('file-name').textContent = file.name;
-    document.getElementById('file-meta').textContent = `${(file.size / 1024).toFixed(1)} KB · ${ext} · Ready`;
+    document.getElementById('file-meta').textContent = `${(file.size/1024).toFixed(1)} KB · ${ext} · Ready`;
     document.getElementById('file-preview').classList.add('show');
     document.getElementById('extract-btn').disabled = false;
   }
@@ -1814,183 +1630,123 @@
 
   function skipExtract() { goToStep(2); }
 
-  // ── AI EXTRACTION ──
   async function runExtraction() {
     const btn = document.getElementById('extract-btn');
-    btn.disabled = true;
-    btn.textContent = '⏳ Extracting…';
+    btn.disabled = true; btn.textContent = '⏳ Extracting…';
     document.getElementById('ai-status').classList.add('show');
-
     const steps = [
-      [600, 'Parsing document structure…', 'Identifying tables, headers, cargo details'],
-      [900, 'Extracting shipment fields…', 'Origin, destination, incoterms, commodity'],
-      [700, 'Resolving port codes…', 'Matching UNLOCODE database'],
-      [600, 'Identifying parties…', 'Shipper, consignee, notify party'],
-      [700, 'Running HTS classification check…', 'Verifying HS codes against current schedule B'],
+      [600,'Parsing document structure…','Identifying tables, headers, cargo details'],
+      [900,'Extracting shipment fields…','Origin, destination, incoterms, commodity'],
+      [700,'Resolving port codes…','Matching UNLOCODE database'],
+      [600,'Identifying parties…','Shipper, consignee, notify party'],
+      [700,'Running HTS classification check…','Verifying HS codes against current schedule B'],
     ];
-
-    for (const [delay, title, detail] of steps) {
+    for (const [delay,title,detail] of steps) {
       document.getElementById('ai-status-title').textContent = title;
       document.getElementById('ai-status-detail').textContent = detail;
       await sleep(delay);
     }
-
     document.getElementById('ai-status').classList.remove('show');
     btn.textContent = '✓ Extraction Complete';
     btn.style.background = 'var(--green)';
-    btn.style.border = 'none';
-
     await sleep(600);
     goToStep(2);
   }
 
-  // ── CREDIT CHECK ──
   async function runCreditCheck() {
     const company = document.getElementById('f-company').value.trim();
-    if (!company) {
-      alert('Please enter a company name before running a credit check.');
-      return;
-    }
-
+    if (!company) { alert('Please enter a company name first.'); return; }
     const btn = document.getElementById('credit-btn');
-    btn.disabled = true;
-    btn.textContent = '⏳ Running…';
-
+    btn.disabled = true; btn.textContent = '⏳ Running…';
     document.getElementById('credit-ai-status').classList.add('show');
     document.getElementById('credit-result').classList.remove('show');
-
     const statuses = [
-      [800, 'Querying D&B commercial database…'],
-      [900, 'Pulling Experian business credit…'],
-      [700, 'Checking internal payment history…'],
-      [500, 'Computing risk score…'],
+      [800,'Querying D&B commercial database…'],
+      [900,'Pulling Experian business credit…'],
+      [700,'Checking internal payment history…'],
+      [500,'Computing risk score…'],
     ];
-
-    for (const [delay, detail] of statuses) {
+    for (const [delay,detail] of statuses) {
       document.getElementById('credit-status-detail').textContent = detail;
       await sleep(delay);
     }
-
     document.getElementById('credit-ai-status').classList.remove('show');
-
-    // Simulated result
     const score = 78 + Math.floor(Math.random() * 12);
     const isGood = score >= 80;
-    const limit = isGood ? '$75,000' : '$25,000';
-    const risk = isGood ? 'Low' : 'Moderate';
-    const terms = isGood ? 'Net 30' : 'Net 15';
-    const statusText = isGood ? '✓ Credit Approved' : '⚠ Conditionally Approved';
-    const dotColor = isGood ? 'var(--green)' : 'var(--warn)';
-
     document.getElementById('cm-score').textContent = score;
-    document.getElementById('cm-limit').textContent = limit;
-    document.getElementById('cm-risk').textContent = risk;
-    document.getElementById('cm-terms').textContent = terms.replace('Net ', '');
-    document.getElementById('credit-status-text').textContent = statusText;
+    document.getElementById('cm-limit').textContent = isGood ? '$75,000' : '$25,000';
+    document.getElementById('cm-risk').textContent = isGood ? 'Low' : 'Moderate';
+    document.getElementById('cm-terms').textContent = isGood ? '30' : '15';
+    document.getElementById('credit-status-text').textContent = isGood ? '✓ Credit Approved' : '⚠ Conditionally Approved';
     document.getElementById('credit-status-text').style.color = isGood ? 'var(--green)' : 'var(--warn)';
-    document.getElementById('credit-dot').style.background = dotColor;
+    document.getElementById('credit-dot').style.background = isGood ? 'var(--green)' : 'var(--warn)';
     document.getElementById('credit-result-header').style.background = isGood ? 'var(--green-dim)' : 'var(--warn-dim)';
     document.getElementById('credit-run-time').textContent = 'Checked ' + new Date().toLocaleTimeString();
-
     document.getElementById('credit-result').classList.add('show');
     creditChecked = true;
-
-    btn.disabled = false;
-    btn.textContent = '↺ Re-run';
-
+    btn.disabled = false; btn.textContent = '↺ Re-run';
     document.getElementById('review-credit-status').textContent = isGood ? '✓ Approved' : '⚠ Conditional';
     document.getElementById('review-credit-status').className = 'status-badge ' + (isGood ? 'badge-green' : 'badge-warn');
   }
 
-  // ── RADIO SELECT ──
   function selectRadio(el, name) {
-    document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
-      r.closest('.radio-option')?.classList.remove('selected');
-    });
+    document.querySelectorAll(`input[name="${name}"]`).forEach(r => r.closest('.radio-option')?.classList.remove('selected'));
     el.classList.add('selected');
     el.querySelector('input').checked = true;
   }
 
-  // ── CARGO TABLE ──
   let rowCount = 1;
   function addCargoRow() {
     rowCount++;
-    const n = String(rowCount).padStart(2, '0');
+    const n = String(rowCount).padStart(2,'0');
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td style="font-family:var(--mono);font-size:11px;color:var(--text3);">${n}</td>
+      <td style="font-size:11px;font-weight:700;color:var(--text3);">${n}</td>
       <td><input type="text" placeholder="Description"></td>
-      <td><input type="text" placeholder="0000.00.0000" style="font-family:var(--mono);font-size:11px;"></td>
+      <td><input type="text" placeholder="0000.00.0000" style="font-size:11px;"></td>
       <td><input type="number" placeholder="0" style="width:60px"></td>
-      <td>
-        <select style="width:70px;font-size:11px;padding:6px 4px;">
-          <option>CTNS</option><option>PKGS</option><option>PLTS</option><option>PCS</option>
-        </select>
-      </td>
+      <td><select style="width:72px;font-size:11px;padding:6px 4px;"><option>CTNS</option><option>PKGS</option><option>PLTS</option><option>PCS</option></select></td>
       <td><input type="number" placeholder="0" style="width:80px"></td>
       <td><input type="number" placeholder="0" style="width:60px"></td>
       <td><input type="number" placeholder="0" style="width:90px"></td>
-      <td><button onclick="removeRow(this)" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;">×</button></td>
-    `;
+      <td><button onclick="removeRow(this)" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;padding:2px 6px;">×</button></td>`;
     document.getElementById('cargo-body').appendChild(tr);
   }
 
   function removeRow(btn) {
-    const tr = btn.closest('tr');
-    if (document.getElementById('cargo-body').children.length > 1) tr.remove();
+    if (document.getElementById('cargo-body').children.length > 1) btn.closest('tr').remove();
   }
 
-  // ── REVIEW ──
   function buildReview() {
     const now = new Date();
     document.getElementById('quote-date').innerHTML =
-      `<span style="font-size:11px;color:var(--text3);">Drafted</span><br>${now.toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'})} ${now.toLocaleTimeString()}`;
-
-    if (!creditChecked) {
-      document.getElementById('review-alert').style.display = 'flex';
-    } else {
-      document.getElementById('review-alert').style.display = 'none';
-    }
+      `<span style="font-size:11px;opacity:0.5">Drafted</span><br><span style="font-size:12px;font-weight:600;">${now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})} ${now.toLocaleTimeString()}</span>`;
+    document.getElementById('review-alert').style.display = !creditChecked ? 'flex' : 'none';
   }
 
-  // ── SUBMIT ──
   async function submitQuote() {
     const btn = document.querySelector('.btn-submit');
-    btn.disabled = true;
-    btn.textContent = '⏳ Submitting…';
+    btn.disabled = true; btn.textContent = '⏳ Submitting…';
     await sleep(1400);
     document.getElementById('success-time').textContent = new Date().toLocaleString();
     goToStep(5);
   }
 
-  // ── RESET ──
   function resetApp() {
-    creditChecked = false;
-    fileSelected = false;
+    creditChecked = false; fileSelected = false;
     document.getElementById('file-preview').classList.remove('show');
     document.getElementById('ai-status').classList.remove('show');
     document.getElementById('credit-result').classList.remove('show');
     document.getElementById('credit-ai-status').classList.remove('show');
-    document.getElementById('extract-btn').disabled = true;
-    document.getElementById('extract-btn').textContent = '✦ Extract with AI';
-    document.getElementById('extract-btn').style.background = '';
+    const eb = document.getElementById('extract-btn');
+    eb.disabled = true; eb.textContent = '✦ Extract with AI'; eb.style.background = '';
     document.getElementById('credit-btn').textContent = '▶ Run Credit Check';
     document.getElementById('credit-btn').disabled = false;
     document.getElementById('file-input').value = '';
-
-    // Reset step 5 → step 1 carefully
-    document.getElementById('panel-5').classList.remove('active');
-    currentStep = 5;
-    goToStep(1);
+    currentStep = 5; goToStep(1);
   }
 
   function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-  // Set date on load
-  document.addEventListener('DOMContentLoaded', () => {
-    const today = new Date();
-    document.querySelector('#f-ready') && (document.querySelector('#f-ready').value = '');
-  });
 </script>
 </body>
 </html>
